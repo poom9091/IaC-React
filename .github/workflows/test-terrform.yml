@@ -10,18 +10,17 @@ env:
   TERRAFORM_DESTORY: false
   
 on:
-  push:
+  pull_request:
+    types: 
+      - review_requested
+      - edited
+      - assigned
     branches:
       - feature/**
       - develop
       - uat
       - main
       - master
-  pull_request:
-    types: 
-      - review_requested
-      - edited
-      - assigned
 
 jobs:
   terraform:
