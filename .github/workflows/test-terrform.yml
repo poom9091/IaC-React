@@ -11,10 +11,6 @@ env:
   
 on:
   pull_request:
-    types: 
-      - review_requested
-      - edited
-      - assigned
     branches:
       - feature/**
       - develop
