@@ -1,0 +1,8 @@
+PROJECT_NAME="next-boilerplate"
+REPO_ID="poom9091/Next-Boilerplate"
+
+# AWS_ACCESS_KEY
+# AWS_SECRET_KEY
+# AWS_REGION
+# SLACK_CHANNEL
+# SLACK_WORKSPACE
