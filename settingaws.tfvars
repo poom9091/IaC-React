@@ -1,5 +1,5 @@
-PROJECT_NAME="next-boilerplate"
-REPO_ID="poom9091/Next-Boilerplate"
+PROJECT_NAME="react-pubadee"
+REPO_ID="poom9091/React-Boilerplate"
 
 # AWS_ACCESS_KEY
 # AWS_SECRET_KEY
