@@ -94,6 +94,7 @@ jobs:
         chmod +x "../script/setbackend.sh"
         ../script/setbackend.sh pipeline
         rm -rf *.tfstate 
+   
 
     - name: Terraform Destroy
       if: |
@@ -103,20 +104,23 @@ jobs:
       working-directory: ./environment/${{ github.event.ref }}
       run: |
         terraform init
-        terraform destroy -auto-approve
+        terraform destroy -auto-approve -var-file='../../settingaws.tfvars'
 
     - name: Prod Terraform Destroy
       if: |
-        ( ${{ github.event.ref }} == 'develop'|| 
-        ${{ github.event.ref }} == 'uat' )  
+        ( ${{ github.event.ref }} == 'main'|| 
+        ${{ github.event.ref }} == 'master' )  
         && github.event_name == 'deleted'
       working-directory: ./environment/prod
       run: |
         terraform init
-        terraform destroy -auto-approve
-    
+        terraform destroy -auto-approve -var-file='../../settingaws.tfvars'
+
+     
+        
     - name: Delete AWS pipeline
       working-directory: ./global/AWS-pipeline
+      if: github.event_name == 'deleted'
       env:
         TF_VAR_ENV_NAME: ${{ github.event.ref }}
         TF_VAR_BRANCH_NAME: ${{ github.event.ref }}
@@ -124,7 +128,7 @@ jobs:
         TF_VAR_REPO_IAC_ID: ${{ github.repository }}
       run: |
         terraform init
-        terraform destroy -auto-approve
+        terraform destroy -auto-approve -var-file='../../settingaws.tfvars'
 
       
 
