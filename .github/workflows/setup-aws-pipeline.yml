@@ -78,4 +78,28 @@ jobs:
         terraform init
         terraform validate
         terraform apply -input=false -auto-approve  
+    
+    - name: Setup Terraform Chatbot remote
+      working-directory: ./remote-state
+      env:
+        TF_VAR_GIT_BRANCH: chatbot
+        GIT_BRANCH: chatbot
+      run: |
+        terraform init
+        terraform validate
+        terraform apply -input=false -auto-approve -var-file='../settingaws.tfvars' || true
+        chmod +x "../script/setbackend.sh"
+        ../script/setbackend.sh chatbot 
+        rm -rf *.tfstate 
+
+    - name: Create Chatbot
+      working-directory: ./remote-state-awschatbot
+      env:
+        TF_VAR_GIT_REPO_NAME: ${{ github.event.repository.name }}
+        TF_VAR_GIT_BRANCH: chatbot
+        GIT_BRANCH: chatbot
+      run: |
+        terraform init 
+        terraform validate  
+        terraform apply -input=false -auto-approve -var-file='../settingaws.tfvars' || true
 

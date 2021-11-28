@@ -38,6 +38,7 @@ phases:
       - chmod +x ../script/setbackend.sh 
       - ../script/setbackend.sh chatbot
       - rm -rf *.tfstate && cd ../
+      
       # terraform plan
       - cd ./environment/$ENV
       - terraform init

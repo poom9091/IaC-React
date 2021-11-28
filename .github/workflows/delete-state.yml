@@ -67,9 +67,7 @@ jobs:
     - name:  Prod Setup Terraform remote 
       working-directory: ./remote-state
       if: | 
-        ( ${{ github.event.ref }} == 'develop'|| 
-        ${{ github.event.ref }} == 'uat' )  
-        && github.event_name == 'deleted'
+        ${{ github.event.ref == 'main' }} && github.event_name == 'deleted'
       env:
         TF_VAR_GIT_REPO_NAME: ${{ github.event.repository.name }}
         TF_VAR_GIT_BRANCH: prod 
@@ -108,16 +106,13 @@ jobs:
 
     - name: Prod Terraform Destroy
       if: |
-        ( ${{ github.event.ref }} == 'main'|| 
-        ${{ github.event.ref }} == 'master' )  
-        && github.event_name == 'deleted'
+        ${{ github.event.ref == 'main' }} && github.event_name == "deleted"
       working-directory: ./environment/prod
       run: |
         terraform init
         terraform destroy -auto-approve -var-file='../../settingaws.tfvars'
 
-     
-        
+
     - name: Delete AWS pipeline
       working-directory: ./global/AWS-pipeline
       if: github.event_name == 'deleted'
