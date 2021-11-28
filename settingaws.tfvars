@@ -1,4 +1,4 @@
-PROJECT_NAME="react-pubadee"
+PROJECT_NAME="react-exam"
 REPO_ID="poom9091/React-Boilerplate"
 
 # AWS_ACCESS_KEY
