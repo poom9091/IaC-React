@@ -31,4 +31,10 @@ module "codepipeline" {
   SLACK_CHANNEL_ID = var.SLACK_CHANNEL
   SLACK_WORKSPACE_ID = var.SLACK_WORKSPACE
   #SSR = var.ServerSide
+  
+}
+  
+resource "aws_s3_bucket" "S3-image" {
+  bucket = "pubadee-images-s3"
+  acl    = "private"
 }
